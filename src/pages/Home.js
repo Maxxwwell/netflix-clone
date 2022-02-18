@@ -1,12 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
+import Banner from '../components/Banner'
 import MovieRow from '../components/MovieRow'
 import requests from '../services/request'
 
 function Home() {
     return (
         
+
         <MoviesContainer>
+            <Banner />
+
             <MovieRow title="NETFLIX ORIGINALS" fetchUrl={requests.fetchNetflixOriginals} isLargeRow />
             <MovieRow title="Up Coming" fetchUrl={requests.fetchUpcoming} />
             <MovieRow title="Trending Now" fetchUrl={requests.fetchTrending} />
@@ -25,5 +29,11 @@ function Home() {
 
 export default Home
 
+
+// const BannerContainer = styled.div`
+// `
+
 const MoviesContainer = styled.div`
+overflow-x: hidden;
 `
+

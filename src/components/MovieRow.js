@@ -18,7 +18,7 @@ function MovieRow({ title, fetchUrl, isLargeRow }) {
         fetchData();
     }, [fetchUrl]);
 
-    console.table(movies);
+    // console.table(movies);
 
     return (
         <RowContainer>
@@ -29,7 +29,7 @@ function MovieRow({ title, fetchUrl, isLargeRow }) {
                     <Wrap>
                         <img
                             key={movie.id}
-                             height= {isLargeRow ? "250px" : "120px"} 
+                            height={isLargeRow ? "250px" : "120px"}
                             src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`} alt={movie.name}
                         />
                     </Wrap>
@@ -67,8 +67,6 @@ const Wrap = styled.div`
 
       
     }
-
-    
 
     &:hover {
        transform: scale(1.08) ;
