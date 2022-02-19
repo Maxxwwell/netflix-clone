@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Banner from '../components/Banner'
 import MovieRow from '../components/MovieRow'
+import NavBar from '../components/NavBar'
 import requests from '../services/request'
 
 function Home() {
@@ -9,6 +10,7 @@ function Home() {
         
 
         <MoviesContainer>
+            <NavBar />
             <Banner />
 
             <MovieRow title="NETFLIX ORIGINALS" fetchUrl={requests.fetchNetflixOriginals} isLargeRow />

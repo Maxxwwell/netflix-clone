@@ -22,7 +22,7 @@ function MovieRow({ title, fetchUrl, isLargeRow }) {
 
     return (
         <RowContainer>
-            <h2>{title}</h2>
+            <h4>{title}</h4>
 
             <RowPoster>
                 {movies.map(movie => (
@@ -43,6 +43,7 @@ export default MovieRow;
 
 const RowContainer = styled.div`
     margin-left: 20px;
+    color: white;
 `
 const RowPoster = styled.div`
     display: flex;
@@ -63,13 +64,12 @@ const Wrap = styled.div`
         /* width: 100%; */
         cursor: pointer;
         object-fit: contain;
-        transition: transform 250ms;
-
-      
+        transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
     }
 
     &:hover {
        transform: scale(1.08) ;
        opacity: 1;
+     
     }
 `
