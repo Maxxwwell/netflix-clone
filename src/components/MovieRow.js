@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react'
 import requests from '../services/request';
 import axios from "../services/axios"
 import styled from 'styled-components';
+import YouTube from 'react-youtube';
+import movieTrailer from "movie-trailer";
 
 const base_url = "https://image.tmdb.org/t/p/original/";
 
 function MovieRow({ title, fetchUrl, isLargeRow }) {
 
     const [movies, setMovies] = useState([]);
+    const [trailerUrl, setTrailerUrl] = useState("");
 
     useEffect(() => {
         async function fetchData() {
@@ -19,6 +22,27 @@ function MovieRow({ title, fetchUrl, isLargeRow }) {
     }, [fetchUrl]);
 
     // console.table(movies);
+    const opts = {
+        height: "350",
+        width: "100%",
+        playerVars: {
+            autoPlay: 1,
+        }
+    }
+
+    const handleClick = (movie) => {
+        if (trailerUrl) {
+            setTrailerUrl("");
+        } else {
+            movieTrailer(movie?.name || "")
+                .then((url) => {
+                    // https://www.youtube.com/watch?v=hUhMYRL4i1g
+                    console.log(movie.name)
+                    const urlParams = new URLSearchParams(new URL(url).search);
+                    setTrailerUrl(urlParams.get("v"));
+                }).catch(error => console.log(error));
+        }
+    };
 
     return (
         <RowContainer>
@@ -26,15 +50,18 @@ function MovieRow({ title, fetchUrl, isLargeRow }) {
 
             <RowPoster>
                 {movies.map(movie => (
-                    <Wrap>
+                    <Wrap onClick={() => handleClick(movie)}>
                         <img
                             key={movie.id}
+                            
                             height={isLargeRow ? "250px" : "120px"}
                             src={`${base_url}${isLargeRow ? movie.poster_path : movie.backdrop_path}`} alt={movie.name}
                         />
                     </Wrap>
                 ))}
             </RowPoster>
+            {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
+
         </RowContainer>
     )
 }
